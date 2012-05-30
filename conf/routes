@@ -5,5 +5,19 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+# List testimonials
+GET		/testimonials				controllers.Application.listTestimonials()
+
+# Add testimonial
+GET     /testimonial/new            controllers.Application.createTestimonial()
+POST    /testimonials               controllers.Application.saveTestimonial()
+
+# Edit existing testimonial
+GET     /testimonial/:id            controllers.Application.editTestimonial(id:Long)
+POST    /testimonial/:id            controllers.Application.updateTestimonial(id:Long)
+
+# Delete a testimonial
+POST    /testimonial/:id/delete     controllers.Application.deleteTestimonial(id:Long)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
