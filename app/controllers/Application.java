@@ -1,20 +1,20 @@
 package controllers;
 
+import models.Testimonial;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.index;
 
 public class Application extends Controller {
 
   public static Result index() {
-    return ok(index.render("Your new application is ready."));
+    return ok(views.html.index.render("Your new application is ready."));
   }
 
   /**
    * Display all testimonials.
    */
   public static Result listTestimonials() {
-    return TODO;
+    return ok(views.html.listTestimonials.render(Testimonial.find.all()));
   }
 
   /**
