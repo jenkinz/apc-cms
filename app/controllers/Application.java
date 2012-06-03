@@ -1,6 +1,9 @@
 package controllers;
 
+import java.util.Date;
+
 import models.Testimonial;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -23,7 +26,8 @@ public class Application extends Controller {
    * @return
    */
   public static Result createTestimonial() {
-    return TODO;
+    Form<Testimonial> testimonialForm = form(Testimonial.class);
+    return ok(views.html.createTestimonialForm.render(testimonialForm));
   }
 
   /**
@@ -32,7 +36,18 @@ public class Application extends Controller {
    * @return
    */
   public static Result saveTestimonial() {
-    return TODO;
+    Form<Testimonial> testimonialForm = form(Testimonial.class)
+        .bindFromRequest();
+    if (testimonialForm.hasErrors()) {
+      return badRequest(views.html.createTestimonialForm
+          .render(testimonialForm));
+    }
+    Testimonial testimonial = testimonialForm.get();
+    testimonial.dtCreated = new Date();
+    testimonial.dtLastModified = testimonial.dtCreated;
+    testimonial.save();
+    flash("success", "Testimonial " + testimonial.name + " has been created");
+    return listTestimonials();
   }
 
   /**

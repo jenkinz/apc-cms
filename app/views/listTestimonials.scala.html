@@ -12,7 +12,7 @@
   
   <div id="actions">
         
-    <a class="btn success" id="add" href="@routes.Application.createTestimonial()">Add a new Testimonial</a>
+    <a class="btn success" id="add" href="@routes.Application.createTestimonial()">Add a Testimonial</a>
         
   </div>
   
@@ -24,14 +24,14 @@
     
   } else {
     
-    <table class="computers zebra-striped">
+    <table class="testimonials zebra-striped">
       <thead>
         <tr>
-          <th class="headerSortUp">
+          <th>
             Name
           </th>
-          <th class="headerSortUp">
-            Date
+          <th>
+            Date Added
           </th>
         </tr>
       </thead>
@@ -39,8 +39,8 @@
         
         @for(testimonial <- testimonials) {
             <tr>
-              <td><a href="@routes.Application.editTestimonial(testimonial.id)">@testimonial.name</a></td>
-              <td>
+              <td class="name"><a href="@routes.Application.editTestimonial(testimonial.id)">@testimonial.name</a></td>
+              <td class="dtCreated">
               @if(testimonial.dtCreated == null) {
               <em>-</em>
               } else {
