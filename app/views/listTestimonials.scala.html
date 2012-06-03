@@ -1,7 +1,61 @@
-@(currentPage: List[Testimonial])
+@(testimonials: List[Testimonial])
 
-@main(title = "Testimonials") {
+@main {
     
-    <div>Testimonials</div>
+  <h1 id="homeTitle">Testimonials</h1>
+  
+  @if(flash.containsKey("success")) {
+    <div class="alert-message warning">
+      <strong>Done!</strong> @flash.get("success")
+    </div>
+  }
+  
+  <div id="actions">
         
+    <a class="btn success" id="add" href="@routes.Application.createTestimonial()">Add a new Testimonial</a>
+        
+  </div>
+  
+  @if(testimonials.size == 0) {
+    
+    <div class="well">
+      <em>No Testimonials found</em>
+    </div>
+    
+  } else {
+    
+    <table class="computers zebra-striped">
+      <thead>
+        <tr>
+          <th class="headerSortUp">
+            Name
+          </th>
+          <th class="headerSortUp">
+            Date
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        @for(testimonial <- testimonials) {
+            <tr>
+              <td><a href="@routes.Application.editTestimonial(testimonial.id)">@testimonial.name</a></td>
+              <td>
+              @if(testimonial.dtCreated == null) {
+              <em>-</em>
+              } else {
+                  @testimonial.dtCreated.format("dd MMM yyyy")
+              }
+              </td>
+              
+            </tr>
+        }
+
+      </tbody>
+    </table>
+    
+    
+  }
+  
+  
 }
