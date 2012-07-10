@@ -57,7 +57,9 @@ public class Application extends Controller {
    * @return
    */
   public static Result editTestimonial(Long id) {
-    return TODO;
+    Form<Testimonial> testimonialForm = form(Testimonial.class).fill(
+        Testimonial.find.byId(id));
+    return ok(views.html.editTestimonialForm.render(id, testimonialForm));
   }
 
   /**
@@ -67,7 +69,17 @@ public class Application extends Controller {
    * @return
    */
   public static Result updateTestimonial(Long id) {
-    return TODO;
+    Form<Testimonial> testimonialForm = form(Testimonial.class)
+        .bindFromRequest();
+    if (testimonialForm.hasErrors()) {
+      return badRequest(views.html.createTestimonialForm
+          .render(testimonialForm));
+    }
+    Testimonial testimonial = testimonialForm.get();
+    testimonial.dtLastModified = new Date();
+    testimonial.update(id);
+    flash("success", "Testimonial " + testimonial.name + " was saved");
+    return listTestimonials();
   }
 
   /**

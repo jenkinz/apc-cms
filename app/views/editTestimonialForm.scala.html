@@ -1,0 +1,28 @@
+@(id: Long, testimonialForm: Form[Testimonial])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Add a Testimonial</h1>
+    
+    @form(routes.Application.updateTestimonial(id)) {
+        
+        <fieldset>
+        
+            @inputText(testimonialForm("name"), '_label -> "Name")
+            @textarea(testimonialForm("quote"), '_label -> "Testimonial Quote")
+            @inputText(testimonialForm("location"), '_label -> "Location of Service", 'placeholder -> "e.g. Palo Alto, CA")  
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save" class="btn primary"> or 
+            <a href="@routes.Application.listTestimonials()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}
