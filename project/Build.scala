@@ -10,7 +10,8 @@ object ApplicationBuild extends Build {
     val appDependencies = Seq(
       // Add your project dependencies here,
       "mysql" % "mysql-connector-java" % "5.1.18", // for DEV
-      "postgresql" % "postgresql" % "8.4-702.jdbc4" // for PROD
+      "postgresql" % "postgresql" % "8.4-702.jdbc4", // for PROD
+      "com.amazonaws" % "aws-java-sdk" % "1.3.12" // for access to Amazon S3 storage service
     )
 
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(

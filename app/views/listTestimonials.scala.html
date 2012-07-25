@@ -33,6 +33,9 @@
           <th>
             Date Added
           </th>
+          <th>
+            Action
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -47,7 +50,11 @@
                   @testimonial.dtCreated.format("dd MMM yyyy")
               }
               </td>
-              
+              <td>
+                <form method="post" action="@routes.Application.deleteTestimonial(testimonial.id)">
+                  <input type="submit" class="btn error" value="Delete" />
+                </form>
+              </td>
             </tr>
         }
 

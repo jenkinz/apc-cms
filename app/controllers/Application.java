@@ -89,6 +89,8 @@ public class Application extends Controller {
    * @return
    */
   public static Result deleteTestimonial(Long id) {
-    return TODO;
+    Testimonial.find.byId(id).delete();
+    flash("success", "Testimonial was deleted");
+    return listTestimonials();
   }
 }
